@@ -1,13 +1,7 @@
-# App de Email Marketing
+# Formulario de recopilación de datos
 
-Esta es una aplicación de Email Marketing diseñada para ayudarte a gestionar y enviar campañas de correo electrónico de manera efectiva.
+Esta es una aplicación diseñada para recopilar datos mediante un formulario en Streamlit usando AWS.
 
-## Características
-
-- Gestión de listas de suscriptores
-- Creación y personalización de plantillas de correo electrónico
-- Programación de envío de correos electrónicos
-- Seguimiento y análisis de métricas de campañas
 
 ## Instalación
 
