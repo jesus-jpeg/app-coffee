@@ -278,32 +278,49 @@ with c1:
 
 with c2:
     st.write("##")
-    pais = st.selectbox("País*", options=PAISES, key="pais")
-    ciudades_disp = CIUDADES_POR_PAIS.get(pais, ["Otro"])
-    ciudad = st.selectbox("Ciudad*", options=ciudades_disp, key="ciudad")
-    with st.form("contact_form", clear_on_submit=False):
-        nombre = st.text_input("Nombre*", placeholder="Tu nombre")
-        email = st.text_input("Email*", placeholder="Tu mejor email")
 
+    # Contenedor visual (todo junto)
+    with st.container():
+
+        # 1) Nombre / Email
+        nombre = st.text_input("Nombre*", placeholder="Tu nombre", key="nombre")
+        email = st.text_input("Email*", placeholder="Tu mejor email", key="email")
+
+        # 2) Fecha nacimiento / Salario
         fecha_nacimiento = st.date_input(
             "Fecha de nacimiento",
             value=None,
-            format="DD/MM/YYYY"
+            format="DD/MM/YYYY",
+            key="fecha_nacimiento"
         )
 
         salario_str = st.text_input(
             "Salario bruto anual (€)*",
-            placeholder="Ej: 35000 o 35000,00"
-       	)
+            placeholder="Ej: 35000 o 35000,00",
+            key="salario_str"
+        )
 
-        experiencia = st.selectbox("Experiencia*", options=EXPERIENCIAS, index=0)
+        # 3) País / Ciudad (FUERA del form para que actualice bien, pero en el orden correcto)
+        pais = st.selectbox("País*", options=PAISES, key="pais")
+        ciudades_disp = CIUDADES_POR_PAIS.get(pais, ["Otro"])
 
-        empresa = st.text_input("Empresa*", placeholder="Nombre de la empresa")
-        posicion = st.selectbox("Posición*", options=POSICIONES, index=0)
+        # Si la ciudad anterior no pertenece al nuevo país, la reseteamos
+        if st.session_state.get("ciudad") not in ciudades_disp:
+            st.session_state["ciudad"] = ciudades_disp[0]
 
-        policy = st.checkbox("Acepto recibir comunicaciones y la política de privacidad")
+        ciudad = st.selectbox("Ciudad*", options=ciudades_disp, key="ciudad")
 
-        enviar = st.form_submit_button("Enviar")
+        # 4) Experiencia / Posición
+        experiencia = st.selectbox("Experiencia*", options=EXPERIENCIAS, key="experiencia")
+        posicion = st.selectbox("Posición*", options=POSICIONES, key="posicion")
+
+        # 5) Empresa
+        empresa = st.text_input("Empresa*", placeholder="Nombre de la empresa", key="empresa")
+
+        # 6) Consentimiento + Submit (dentro de form para que el submit sea “atómico”)
+        with st.form("contact_form", clear_on_submit=False):
+            policy = st.checkbox("Acepto recibir comunicaciones y la política de privacidad", key="policy")
+            enviar = st.form_submit_button("Enviar")
 
     if enviar:
         nombre_norm = (nombre or "").strip()
