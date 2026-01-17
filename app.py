@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime, date, timezone
 from decimal import Decimal, InvalidOperation
 from sqlalchemy import create_engine, text
-
 # =====================
 # CONFIGURACIÓN STREAMLIT
 # =====================
@@ -22,54 +21,117 @@ UOC_TEXT = "#000078"
 
 uoc_css = f"""
 <style>
-/* Fondo general */
+/* =========================
+   FONDO GENERAL
+   ========================= */
 .stApp {{
     background: {UOC_BG};
     color: {UOC_TEXT};
 }}
 
-/* Títulos y texto */
-h1, h2, h3, h4, h5, h6, p, label, span, div {{
+/* =========================
+   TEXTO GENERAL
+   ========================= */
+h1, h2, h3, h4, h5, h6,
+p, label, span {{
     color: {UOC_TEXT} !important;
 }}
 
-/* Inputs */
-.stTextInput input, .stNumberInput input, .stDateInput input {{
-    background: #ffffff !important;
+/* =========================
+   INPUTS TEXTO / FECHA
+   ========================= */
+.stTextInput input,
+.stNumberInput input,
+.stDateInput input {{
+    background-color: #ffffff !important;
     color: {UOC_TEXT} !important;
-    border: 1px solid {UOC_TEXT}33 !important;
+    border: 1px solid {UOC_TEXT}40 !important;
     border-radius: 10px !important;
 }}
 
+/* =========================
+   SELECTBOX (cerrado)
+   ========================= */
 .stSelectbox div[data-baseweb="select"] > div {{
-    background: #ffffff !important;
+    background-color: #ffffff !important;
     color: {UOC_TEXT} !important;
-    border: 1px solid {UOC_TEXT}33 !important;
+    border: 1px solid {UOC_TEXT}40 !important;
     border-radius: 10px !important;
 }}
 
-/* Checkbox */
+/* =========================
+   SELECTBOX (abierto)
+   ========================= */
+div[data-baseweb="popover"],
+div[data-baseweb="menu"] {{
+    background-color: #ffffff !important;
+}}
+
+div[data-baseweb="option"] {{
+    background-color: #ffffff !important;
+    color: {UOC_TEXT} !important;
+}}
+
+div[data-baseweb="option"]:hover {{
+    background-color: #e6f9ff !important;
+}}
+
+/* =========================
+   DATE PICKER (calendario)
+   ========================= */
+div[role="dialog"] {{
+    background-color: #ffffff !important;
+}}
+
+div[data-baseweb="calendar"] {{
+    background-color: #ffffff !important;
+}}
+
+div[data-baseweb="calendar"] * {{
+    background-color: #ffffff !important;
+    color: {UOC_TEXT} !important;
+}}
+
+/* =========================
+   CHECKBOX
+   ========================= */
 .stCheckbox label {{
     color: {UOC_TEXT} !important;
 }}
 
-/* Botón */
-.stButton button, .stFormSubmitButton button {{
-    background: {UOC_TEXT} !important;
+.stCheckbox input {{
+    accent-color: {UOC_TEXT} !important;
+}}
+
+/* =========================
+   BOTÓN SUBMIT
+   ========================= */
+.stFormSubmitButton button,
+.stButton button {{
+    background-color: {UOC_TEXT} !important;
     color: #ffffff !important;
     border-radius: 12px !important;
     border: none !important;
-    padding: 0.6rem 1rem !important;
+    padding: 0.6rem 1.2rem !important;
     font-weight: 700 !important;
 }}
-.stButton button:hover, .stFormSubmitButton button:hover {{
+
+.stFormSubmitButton button *,
+.stButton button * {{
+    color: #ffffff !important;
+}}
+
+.stFormSubmitButton button:hover,
+.stButton button:hover {{
     opacity: 0.92 !important;
 }}
 
-/* Ocultar menú */
-#MainMenu {{visibility: hidden;}}
-footer {{visibility: hidden;}}
-header {{visibility: hidden;}}
+/* =========================
+   OCULTAR UI STREAMLIT
+   ========================= */
+#MainMenu {{ visibility: hidden; }}
+footer {{ visibility: hidden; }}
+header {{ visibility: hidden; }}
 </style>
 """
 st.markdown(uoc_css, unsafe_allow_html=True)
