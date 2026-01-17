@@ -278,6 +278,9 @@ with c1:
 
 with c2:
     st.write("##")
+    pais = st.selectbox("País*", options=PAISES, key="pais")
+    ciudades_disp = CIUDADES_POR_PAIS.get(pais, ["Otro"])
+    ciudad = st.selectbox("Ciudad*", options=ciudades_disp, key="ciudad")
     with st.form("contact_form", clear_on_submit=False):
         nombre = st.text_input("Nombre*", placeholder="Tu nombre")
         email = st.text_input("Email*", placeholder="Tu mejor email")
@@ -292,12 +295,6 @@ with c2:
             "Salario bruto anual (€)*",
             placeholder="Ej: 35000 o 35000,00"
        	)
-
-        pais = st.selectbox("País*", options=PAISES, key="pais")
-        ciudades_disp = CIUDADES_POR_PAIS.get(pais, ["Otro"])
-        if st.session_state.get("ciudad") not in ciudades_disp:
-            st.session_state["ciudad"] = ciudades_disp[0]
-        ciudad = st.selectbox("Ciudad*", options=ciudades_disp, key="ciudad")
 
         experiencia = st.selectbox("Experiencia*", options=EXPERIENCIAS, index=0)
 
