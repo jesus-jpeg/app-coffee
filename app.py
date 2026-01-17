@@ -25,21 +25,16 @@ uoc_css = f"""
    FONDO GENERAL
    ========================= */
 .stApp {{
-    background: {UOC_BG};
+    background-color: {UOC_BG};
     color: {UOC_TEXT};
 }}
 
-/* =========================
-   TEXTO GENERAL
-   ========================= */
-h1, h2, h3, h4, h5, h6,
-p, label, span {{
+/* TEXTO */
+h1, h2, h3, h4, h5, h6, p, label, span {{
     color: {UOC_TEXT} !important;
 }}
 
-/* =========================
-   INPUTS TEXTO / FECHA
-   ========================= */
+/* INPUTS */
 .stTextInput input,
 .stNumberInput input,
 .stDateInput input {{
@@ -49,9 +44,7 @@ p, label, span {{
     border-radius: 10px !important;
 }}
 
-/* =========================
-   SELECTBOX (cerrado)
-   ========================= */
+/* SELECTBOX CERRADO */
 .stSelectbox div[data-baseweb="select"] > div {{
     background-color: #ffffff !important;
     color: {UOC_TEXT} !important;
@@ -59,9 +52,7 @@ p, label, span {{
     border-radius: 10px !important;
 }}
 
-/* =========================
-   SELECTBOX (abierto)
-   ========================= */
+/* SELECTBOX ABIERTO */
 div[data-baseweb="popover"],
 div[data-baseweb="menu"] {{
     background-color: #ffffff !important;
@@ -72,17 +63,13 @@ div[data-baseweb="option"] {{
     color: {UOC_TEXT} !important;
 }}
 
-div[data-baseweb="option"]:hover {{
+div[data-baseweb="option"]:hover,
+div[data-baseweb="option"][aria-selected="true"] {{
     background-color: #e6f9ff !important;
 }}
 
-/* =========================
-   DATE PICKER (calendario)
-   ========================= */
-div[role="dialog"] {{
-    background-color: #ffffff !important;
-}}
-
+/* DATE PICKER */
+div[role="dialog"],
 div[data-baseweb="calendar"] {{
     background-color: #ffffff !important;
 }}
@@ -92,9 +79,7 @@ div[data-baseweb="calendar"] * {{
     color: {UOC_TEXT} !important;
 }}
 
-/* =========================
-   CHECKBOX
-   ========================= */
+/* CHECKBOX */
 .stCheckbox label {{
     color: {UOC_TEXT} !important;
 }}
@@ -103,9 +88,7 @@ div[data-baseweb="calendar"] * {{
     accent-color: {UOC_TEXT} !important;
 }}
 
-/* =========================
-   BOTÓN SUBMIT
-   ========================= */
+/* BOTÓN */
 .stFormSubmitButton button,
 .stButton button {{
     background-color: {UOC_TEXT} !important;
@@ -126,67 +109,15 @@ div[data-baseweb="calendar"] * {{
     opacity: 0.92 !important;
 }}
 
-/* =========================
-   OCULTAR UI STREAMLIT
-   ========================= */
+/* QUITAR FOCUS AMARILLO */
+*:focus-visible {{
+    outline: none !important;
+}}
+
+/* OCULTAR UI STREAMLIT */
 #MainMenu {{ visibility: hidden; }}
 footer {{ visibility: hidden; }}
 header {{ visibility: hidden; }}
-
-/* =========================
-   FORZAR BLANCO EN BASEWEB
-   (quita amarillos por defecto)
-   ========================= */
-
-/* Fondo de popovers (select abierto, datepicker, etc.) */
-div[data-baseweb="popover"] {
-    background-color: #ffffff !important;
-}
-
-/* Menú desplegable */
-div[data-baseweb="menu"] {
-    background-color: #ffffff !important;
-}
-
-/* Opciones */
-div[data-baseweb="option"] {
-    background-color: #ffffff !important;
-    color: #000078 !important;
-}
-
-/* Hover de opciones */
-div[data-baseweb="option"]:hover,
-div[data-baseweb="option"][aria-selected="true"] {
-    background-color: #e6f9ff !important;
-}
-
-/* Estado focus / active (el amarillo molesto) */
-div[data-baseweb="select"] *:focus,
-div[data-baseweb="select"] *:active {
-    background-color: #ffffff !important;
-    box-shadow: none !important;
-}
-
-/* Datepicker popup */
-div[role="dialog"] {
-    background-color: #ffffff !important;
-}
-
-/* Calendario */
-div[data-baseweb="calendar"] {
-    background-color: #ffffff !important;
-}
-
-div[data-baseweb="calendar"] * {
-    background-color: #ffffff !important;
-    color: #000078 !important;
-}
-
-/* Quitar highlight amarillo inicial */
-*:focus-visible {
-    outline: none !important;
-}
-
 </style>
 """
 st.markdown(uoc_css, unsafe_allow_html=True)
